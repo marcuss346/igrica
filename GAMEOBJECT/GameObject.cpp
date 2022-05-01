@@ -29,3 +29,7 @@ void GameObject::update() {
 void GameObject::draw() {
     SDL_RenderCopy(Menu::renderer,texture,&srcRect,&destRect);
 }
+void GameObject::destroy() {
+    SDL_DestroyTexture(texture);
+}
+

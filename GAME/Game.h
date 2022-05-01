@@ -40,5 +40,7 @@ public:
     void replayUpdate(int x ,int y);
 
     void addAnimal();
+
+
 };
 

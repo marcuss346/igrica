@@ -10,6 +10,7 @@ Player *player;
 GameObject *lab;
 
 
+
 SDL_Event Game::event;
 SDL_Rect Game::camera {
         0, 0 , 1200, 800
@@ -20,16 +21,15 @@ Game::Game() {
     isRunning=true;
     map=new Map();
     player = new Player();
-    lab = new GameObject();
+    lab=new GameObject;
+
 
 }
     void Game::init_newGame() {
         map->init(1,Menu::renderer);
         player->init();
         lab->init("../assets/lab.bmp",100,100);
-        for(int i=0;i<3;i++){
-            addAnimal();
-        }
+
         std::ofstream data("../assets/files/replay.txt");
         data.close();
 
@@ -76,6 +76,17 @@ Game::Game() {
             i++;
         }
 
+        if(SDL_HasIntersection(&lab->destRect, &player->destRect) &&
+                event.type==SDL_KEYDOWN && event.key.keysym.sym == SDLK_k){
+            lab->destroy();
+            for(int i=0;i<3;i++){
+                addAnimal();
+            }
+        }
+
+        if(animals.empty()){
+            lab->init("../assets/lab.bmp",100,100);
+        }
 
         camera.x = player->position.x - 800 / 2;
         camera.y = player->position.y - 640 / 2;
