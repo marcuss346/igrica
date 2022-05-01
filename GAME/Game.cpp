@@ -13,7 +13,7 @@ GameObject *lab;
 
 SDL_Event Game::event;
 SDL_Rect Game::camera {
-        0, 0 , 1200, 800
+        0, 0 , 3000, 2000
 };
 
 
@@ -84,7 +84,7 @@ Game::Game() {
             }
         }
 
-        if(animals.empty()){
+        if(animals.empty() && !lab->exsists){
             lab->init("../assets/lab.bmp",100,100);
         }
 

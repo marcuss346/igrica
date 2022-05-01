@@ -11,7 +11,8 @@ void GameObject::init(const char *path, int w, int h) {
     texture = SDL_CreateTextureFromSurface(Menu::renderer,tmp);
     SDL_FreeSurface(tmp);
 
-    position.x=position.y= 100;
+    position.x= rand()%(3900-0)+0;
+    position.y = rand()%(2900-0)+0;
     destRect.w=w;
     destRect.h=h;
 
@@ -19,6 +20,7 @@ void GameObject::init(const char *path, int w, int h) {
     srcRect.h=310;
     srcRect.x=0;
     srcRect.y=0;
+    exsists = true;
 }
 
 void GameObject::update() {
@@ -31,5 +33,6 @@ void GameObject::draw() {
 }
 void GameObject::destroy() {
     SDL_DestroyTexture(texture);
+    exsists = false;
 }
 

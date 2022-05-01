@@ -14,6 +14,7 @@ class GameObject{
 
 public:
     SDL_Rect destRect, srcRect;
+    bool exsists;
 
     void init(const char *path,int w, int h);
     void update();

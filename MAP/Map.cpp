@@ -17,8 +17,8 @@ void Map::init(int level, SDL_Renderer *ren) {
 void Map::update() {
     destRect.x =-Game::camera.x;
     destRect.y =-Game::camera.y;
-    destRect.w = 1920;
-    destRect.h = 1080;
+    destRect.w = 3000;
+    destRect.h = 2000;
 }
 
 void Map::draw() {
