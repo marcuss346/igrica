@@ -30,7 +30,7 @@ public:
     static SDL_Rect camera;
 
     Game();
-    void init_newGame();
+    void init_newGame(char tmp[]);
     void init_load();
     void init_replay();
     void handleEvents();

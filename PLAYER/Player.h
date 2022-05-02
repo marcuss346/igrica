@@ -5,6 +5,7 @@
 #pragma once
 #include "SDL.h"
 #include "../VECTOR2D/Vector2D.h"
+#include <cstring>
 
 class Player{
     SDL_Texture *staying;
@@ -19,20 +20,21 @@ class Player{
     float speedWalk=20;
     Vector2D velocity;
 
-    int points=0;
-
-
 
 
 public:
+    int points=0;
+    char ime[50];
     int lives= 5;
     Vector2D position;
     SDL_Rect srcRect, destRect;
-    void init();
+    void init(char tmz[]);
     void update();
     void draw();
     void handleInput();
     void addPoints(int);
     void removeLife();
     void randLocation();
+    int returnPoints();
+    void izpis();
 };

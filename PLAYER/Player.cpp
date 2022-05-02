@@ -4,8 +4,10 @@
 
 #include "Player.h"
 #include "../GAME/Game.h"
+#include <iomanip>
 
-void Player::init() {
+void Player::init(char tmz[]) {
+    strcpy(ime,tmz);
     position.x=0;
     position.y=0;
     SDL_Surface *tmp = SDL_LoadBMP("../assets/Player_idle.bmp");
@@ -101,3 +103,5 @@ void Player::randLocation(){
     position.x = rand()%1900;
     position.y = rand()%900;
 }
+
+

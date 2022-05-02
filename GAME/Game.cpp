@@ -9,6 +9,11 @@ Map *map;
 Player *player;
 GameObject *lab;
 
+struct Ldrbrd{
+    char ime[50];
+    int points;
+};
+
 
 
 SDL_Event Game::event;
@@ -25,9 +30,9 @@ Game::Game() {
 
 
 }
-    void Game::init_newGame() {
+    void Game::init_newGame(char tmp[]) {
         map->init(1,Menu::renderer);
-        player->init();
+        player->init(tmp);
         lab->init("../assets/lab.bmp",100,100);
         for(int i=0;i<3;i++){
             addEnemy();
@@ -40,7 +45,7 @@ Game::Game() {
 
     void Game::init_replay() {
         map->init(1,Menu::renderer);
-        player->init();
+
 
 }
 
@@ -50,6 +55,38 @@ Game::Game() {
             case SDL_QUIT:
                 isRunning=false;
                 remove("../assets/files/save.bin");
+                std::ofstream tmp("../assets/files/tmp.bin", std::ios::binary);
+                std::ifstream ldb("../assets/files/leaderboard.bin", std::ios::binary);
+                struct Ldrbrd nova;
+                strcpy(nova.ime, player->ime);
+                nova.points = player->points;
+                bool vpisan = false;
+                int vpisanih=0;
+                if(ldb.is_open()){
+
+                    for(int i=0;i<5;i++) {
+                        struct Ldrbrd neki;
+                         if(ldb.read((char *) &neki, sizeof(neki))) {
+                            if (neki.points < nova.points && !vpisan) {
+                                vpisan = true;
+                                tmp.write((char *) &nova, sizeof(nova));
+                                vpisanih++;
+                            }
+                            if(tmp.write((char *) &neki, sizeof(neki)))vpisanih++;
+                        }
+                    }
+                    if(vpisanih<5 && !vpisan){
+                        tmp.write((char *) &nova, sizeof(nova));
+                    }
+                } if(vpisanih < 5 && !vpisan){
+                    tmp.write((char*)&nova, sizeof (nova));
+                }
+
+                tmp.close();
+                ldb.close();
+
+                remove("../assets/files/leaderboard.bin");
+                rename("../assets/files/tmp.bin", "../assets/files/leaderboard.bin" );
                 break;
         }
 
@@ -85,10 +122,11 @@ Game::Game() {
             if (SDL_HasIntersection(&animals[t].destRect, &player->destRect)
             && (event.type==SDL_KEYDOWN && event.key.keysym.sym == SDLK_c)){
                 animals.erase(animals.begin() + i, animals.begin()+i+1);
-                player->addPoints(50);
+                player->points += 50;
             }
             i++;
         }
+        std::cout<<"points of player: "<<player->points<<std::endl;
 
         if(SDL_HasIntersection(&lab->destRect, &player->destRect) &&
                 event.type==SDL_KEYDOWN && event.key.keysym.sym == SDLK_k){
@@ -170,10 +208,22 @@ Game::Game() {
 
     void Game::saveState() {
         std::ofstream data("../assets/files/save.bin", std::ios::binary);
+        std::ofstream velikosti("../assets/files/velikosti.txt");
 
         data.write((char *)&map, sizeof (map));
         data.write((char *)&player, sizeof(player));
-        //data.write((char *)&animal, sizeof (animal));
+        data.write((char *)&lab,sizeof (lab));
+        int velikostAni = animals.size();
+        velikosti<<velikostAni<<std::endl;
+        int velikostEne = enemies.size();
+        velikosti<<velikostEne<<std::endl;
+        velikosti.close();
+        for(int t=0;t<velikostAni;t++) {
+            data.write((char *)&animals[t], sizeof (animals[t]));
+        }
+        for(int t=0;t<velikostEne;t++) {
+            data.write((char *)&enemies[t], sizeof (enemies[t]));
+        }
 
         data.close();
     }
@@ -184,7 +234,19 @@ Game::Game() {
         if(data.is_open()){
             data.read((char *)&map, sizeof (map));
             data.read((char *)&player, sizeof(player));
-           // data.read((char *)&animal, sizeof(animal));
+            data.read((char *)&lab, sizeof (lab));
+            std::ifstream velikosti("../assets/files/velikosti.txt");
+            int sizeAnim; velikosti>>sizeAnim; int sizeEnem; velikosti>>sizeEnem; velikosti.close();
+            for(int i=0;i<sizeAnim;i++){
+                Animal tmp;
+                data.read((char*)&tmp, sizeof(tmp));
+                animals.push_back(tmp);
+            }
+            for(int i=0;i<sizeEnem;i++){
+                Enemy tmp;
+                data.read((char*)&tmp, sizeof(tmp));
+                enemies.push_back(tmp);
+            }
             data.close();
         }else{
             std::cout<<"no file.. closing"<<std::endl;

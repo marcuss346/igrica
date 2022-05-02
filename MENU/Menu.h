@@ -5,10 +5,11 @@
 #pragma once
 #include "SDL.h"
 #include "iostream"
+#include "cstring"
 
 class Menu{
     SDL_Window *window;
-
+    char ime[50];
     SDL_Texture *selector;
     SDL_Texture *background;
     bool active;

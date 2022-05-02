@@ -16,6 +16,8 @@ SDL_Event Menu::event;
 Game *game=NULL;
 
 Menu::Menu(const char *title, int x, int y, int width, int height, bool fullscreen){
+    std::cout<<"VNESI SVOJE IME: ";
+    fgets(ime,50,stdin);
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
         std::cout << "SDL FAILED TO INITIALISE" << SDL_GetError() << std::endl;
         isRunning = false;
@@ -99,7 +101,7 @@ void Menu::select() {
         case 0:
             active=false;
             game = new Game();
-            game->init_newGame();
+            game->init_newGame(ime);
             while(game->isRunning) {
                 game->handleEvents();
                 game->update();
