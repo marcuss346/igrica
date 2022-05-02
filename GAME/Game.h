@@ -23,6 +23,7 @@ class Game{
     std::vector<Animal> animals;
     std::vector<Enemy> enemies;
 
+    std::ifstream berem;
 
 public:
     bool isRunning;
@@ -39,11 +40,13 @@ public:
     void clean();
 
     void saveState();
-    void replayUpdate(int x ,int y);
 
     void addAnimal();
     void addEnemy();
 
 
+    void replayUpdate();
+
+    void renderReplay();
 };
 

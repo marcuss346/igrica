@@ -6,6 +6,7 @@
 #include "ctime"
 #include "fstream"
 #include "PLAYER/Player.h"
+#include "string"
 
 struct Ldrbrd{
     char ime[50];
@@ -14,7 +15,14 @@ struct Ldrbrd{
 
 int main(int argc, const char *argv[]) {
     srand(time(NULL));
-    Menu *game=new Menu("new game",SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, 0);
+
+    std::string fsc;
+    std::cout<<"VPISI ALI ZELIS FULLSCREEN: vpisi yes za da in no za ne: ";
+    getline(std::cin,fsc);
+    bool f;
+    if(fsc=="YES" or fsc=="yes") f=true; else f=false;
+
+    Menu *game=new Menu("new game",SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, f);
    game->init();
     while(game->isRunning){
        game->update();
@@ -26,7 +34,8 @@ int main(int argc, const char *argv[]) {
         Ldrbrd tmp;
         std::cout<<"leaderboard"<<std::endl;
         std::cout<<"---------------------------------------"<<std::endl;
-        while(data.read((char*)&tmp, sizeof(tmp))){
+        for(int i=0;i<5;i++){
+        data.read((char*)&tmp, sizeof(tmp));
             std::cout<<"IME: "<<tmp.ime << "      "<<"TOCKE: "<<tmp.points<<std::endl;
             std::cout<<"---------------------------------------"<<std::endl;
         }

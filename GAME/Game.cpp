@@ -45,8 +45,8 @@ Game::Game() {
 
     void Game::init_replay() {
         map->init(1,Menu::renderer);
-
-
+        player->init("replay");
+        berem.open("../assets/files/replay.txt");
 }
 
     void Game::handleEvents() {
@@ -78,7 +78,7 @@ Game::Game() {
                     if(vpisanih<5 && !vpisan){
                         tmp.write((char *) &nova, sizeof(nova));
                     }
-                } if(vpisanih < 5 && !vpisan){
+                }else{
                     tmp.write((char*)&nova, sizeof (nova));
                 }
 
@@ -98,6 +98,37 @@ Game::Game() {
         if(player->lives == 0){
             isRunning=false;
             remove("../assets/files/save.bin");
+            std::ofstream tmp("../assets/files/tmp.bin", std::ios::binary);
+            std::ifstream ldb("../assets/files/leaderboard.bin", std::ios::binary);
+            struct Ldrbrd nova;
+            strcpy(nova.ime, player->ime);
+            nova.points = player->points;
+            bool vpisan = false;
+            int vpisanih=0;
+            if(ldb.is_open()){
+                for(int i=0;i<5;i++) {
+                    struct Ldrbrd neki;
+                    if(ldb.read((char *) &neki, sizeof(neki))) {
+                        if (neki.points < nova.points && !vpisan) {
+                            vpisan = true;
+                            tmp.write((char *) &nova, sizeof(nova));
+                            vpisanih++;
+                        }
+                        if(tmp.write((char *) &neki, sizeof(neki)))vpisanih++;
+                    }
+                }
+                if(vpisanih<5 && !vpisan){
+                    tmp.write((char *) &nova, sizeof(nova));
+                }
+            }else{
+                tmp.write((char*)&nova, sizeof (nova));
+            }
+
+            tmp.close();
+            ldb.close();
+
+            remove("../assets/files/leaderboard.bin");
+            rename("../assets/files/tmp.bin", "../assets/files/leaderboard.bin" );
         }
 }
 
@@ -253,10 +284,45 @@ Game::Game() {
         }
 }
 
-void Game::replayUpdate(int x ,int y) {
-    replayB=true;
-    player->position.x=x;
-    player->position.y=y;
+void Game::replayUpdate() {
+
+    if(berem.is_open()){
+        if(berem>>player->position.x &&
+        berem>>player->position.y)
+            camera.x = player->position.x - 800 / 2;
+            camera.y = player->position.y - 640 / 2;
+            player->update();
+            map->update();
+        if( camera.x < 0 )
+        {
+            camera.x = 0;
+        }
+        if( camera.y < 0 )
+        {
+            camera.y = 0;
+        }
+        if( camera.x > camera.w )
+        {
+            camera.x = camera.w;
+        }
+        if( camera.y > camera.h)
+        {
+            camera.y = camera.h;
+        }
+
+    }else{
+        isRunning=false;
+    }
+
+
+
+}
+
+void Game::renderReplay() {
+    SDL_RenderClear(Menu::renderer);
+    map->draw();
+    player->draw();
+    SDL_RenderPresent(Menu::renderer);
 }
 
 void Game::addAnimal(){

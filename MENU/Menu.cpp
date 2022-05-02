@@ -66,6 +66,12 @@ void Menu::update() {
                 select();
             }
         }
+        else if(SDL_HasIntersection(&replay, &selectorRect)){
+            if(event.type==SDL_MOUSEBUTTONDOWN && event.button.button==SDL_BUTTON_LEFT){
+                selection=2;
+                select();
+            }
+        }
         else if(SDL_HasIntersection(&quit, &selectorRect))
             if(event.type==SDL_MOUSEBUTTONDOWN && event.button.button==SDL_BUTTON_LEFT){
                 isRunning=false;
@@ -136,16 +142,8 @@ void Menu::select() {
             game->init_replay();
             while(game->isRunning) {
                 game->handleEvents();
-                std::ifstream data("../assets/files/replay.txt");
-                if(data.is_open()) {
-                    int x,y;
-                    while(data>>x>>y){
-                    game->replayUpdate(x,y);
-                    game->render();
-                    }
-                  game->isRunning=false;
-                }
-                data.close();
+                game->replayUpdate();
+                game->renderReplay();
                 frameTime = SDL_GetTicks() - frameStart;
 
                 if (frameDelay > frameTime) {

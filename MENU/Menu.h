@@ -6,6 +6,7 @@
 #include "SDL.h"
 #include "iostream"
 #include "cstring"
+#include "fstream"
 
 class Menu{
     SDL_Window *window;
@@ -16,6 +17,8 @@ class Menu{
     int selection;
 
     int Mx, My;
+
+
 
     SDL_Rect start = {
             0,
@@ -31,9 +34,16 @@ class Menu{
             128,
     };
 
+    SDL_Rect replay = {
+            0,
+            128*3,
+            800,
+            128,
+    };
+
     SDL_Rect quit = {
             0,
-            128*5 - 90,
+            128*4,
             800,
             128
     };
