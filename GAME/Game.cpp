@@ -156,6 +156,7 @@ Game::Game() {
             player->draw();
             if(lab->exsists)
             lab->draw();
+
         for(int t=0;t<enemies.size();t++){
             enemies[t].draw();
         }
