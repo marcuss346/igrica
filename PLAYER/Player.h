@@ -17,7 +17,7 @@ class Player{
     int framesStanding;
     SDL_RendererFlip flip;
 
-    float speedWalk=20;
+    float speedWalk=10;
     Vector2D velocity;
 
     const int fps=200;

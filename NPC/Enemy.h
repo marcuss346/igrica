@@ -13,7 +13,7 @@ private:
 
     int speed=100;
     int nFrames = 6;
-    int speeds = 2;
+    int speeds = 4;
 
     const int fps=200;
     const int frameDelay=1000/fps;
