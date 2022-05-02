@@ -10,6 +10,7 @@
 #include "../NPC/Animal.h"
 #include "vector"
 #include "../GAMEOBJECT/GameObject.h"
+#include "../NPC/Enemy.h"
 
 class Map;
 class Animal;
@@ -20,6 +21,7 @@ class Game{
     bool replayB;
     SDL_Window *window;
     std::vector<Animal> animals;
+    std::vector<Enemy> enemies;
 
 
 public:
@@ -40,6 +42,7 @@ public:
     void replayUpdate(int x ,int y);
 
     void addAnimal();
+    void addEnemy();
 
 
 };

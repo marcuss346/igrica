@@ -29,6 +29,9 @@ Game::Game() {
         map->init(1,Menu::renderer);
         player->init();
         lab->init("../assets/lab.bmp",100,100);
+        for(int i=0;i<3;i++){
+            addEnemy();
+        }
 
         std::ofstream data("../assets/files/replay.txt");
         data.close();
@@ -62,6 +65,9 @@ Game::Game() {
         }
         lab->update();
         map->update();
+        for(int t=0;t<enemies.size();t++){
+            enemies[t].update();
+        }
         std::ofstream data("../assets/files/replay.txt", std::ios::app);
         data<<player->position.x<<std::endl;
         data<<player->position.y<<std::endl;
@@ -91,6 +97,18 @@ Game::Game() {
         camera.x = player->position.x - 800 / 2;
         camera.y = player->position.y - 640 / 2;
 
+        for(int t=0;t<enemies.size();t++){
+            if(player->position.x > enemies[t].position.x){
+                enemies[t].velocity.x =1;
+            }else if(player->position.x < enemies[t].position.x) {
+                enemies[t].velocity.x = -1;
+            }if(player->position.y > enemies[t].position.y){
+                enemies[t].velocity.y =1;
+            }else if(player->position.y < enemies[t].position.y) {
+                enemies[t].velocity.y = -1;
+            }
+        }
+
         if( camera.x < 0 )
         {
             camera.x = 0;
@@ -116,6 +134,9 @@ Game::Game() {
             map->draw();
             player->draw();
             lab->draw();
+        for(int t=0;t<enemies.size();t++){
+            enemies[t].draw();
+        }
 
 
         if(!replayB)
@@ -160,6 +181,12 @@ void Game::addAnimal(){
     Animal *tmp=new Animal();
     tmp->init();
     animals.push_back(*tmp);
+}
+
+void Game::addEnemy(){
+    Enemy *tmp=new Enemy();
+    tmp->init();
+    enemies.push_back(*tmp);
 }
 
 

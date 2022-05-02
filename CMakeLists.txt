@@ -30,6 +30,6 @@ add_executable(igrica
         VECTOR2D/Vector2D.cpp VECTOR2D/Vector2D.h
         GAMEOBJECT/GameObject.cpp GAMEOBJECT/GameObject.h
         MAP/Map.cpp MAP/Map.h
-        MENU/Menu.cpp MENU/Menu.h  NPC/Animal.cpp NPC/Animal.h)
+        MENU/Menu.cpp MENU/Menu.h  NPC/Animal.cpp NPC/Animal.h NPC/Enemy.cpp NPC/Enemy.h)
 
 target_link_libraries(igrica SDL2main SDL2)
