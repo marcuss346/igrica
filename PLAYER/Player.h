@@ -20,6 +20,11 @@ class Player{
     float speedWalk=20;
     Vector2D velocity;
 
+    const int fps=200;
+    const int frameDelay=1000/fps;
+    Uint32 frameStart = SDL_GetTicks();
+    int frameTime;
+
 
 
 public:

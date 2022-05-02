@@ -19,6 +19,8 @@ void Enemy::init() {
 }
 
 void Enemy::update() {
+    frameStart = SDL_GetTicks();
+
     srcRect.x=srcRect.w * static_cast<int>((SDL_GetTicks()/speed)%nFrames);
 
     position.x += velocity.x *speeds;
@@ -26,6 +28,12 @@ void Enemy::update() {
 
     destRect.x =position.x - Game::camera.x;
     destRect.y=position.y - Game::camera.y;
+
+    frameTime = SDL_GetTicks() - frameStart;
+
+    if (frameDelay > frameTime) {
+        SDL_Delay(frameDelay - frameTime);
+    }
 }
 
 void Enemy::draw() {

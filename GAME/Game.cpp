@@ -43,9 +43,9 @@ Game::Game() {
 
     }
 
-    void Game::init_replay() {
+    void Game::init_replay(char tmz[]) {
         map->init(1,Menu::renderer);
-        player->init("replay");
+        player->init(tmz);
         berem.open("../assets/files/replay.txt");
 }
 
@@ -228,7 +228,6 @@ Game::Game() {
         for(int t=0;t<enemies.size();t++){
             enemies[t].draw();
         }
-        if(!replayB)
             for(int t=0;t<animals.size();t++){
                 animals[t].draw();
             }

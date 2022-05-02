@@ -33,7 +33,7 @@ public:
     Game();
     void init_newGame(char tmp[]);
     void init_load();
-    void init_replay();
+    void init_replay(char tmz[]);
     void handleEvents();
     void update();
     void render();

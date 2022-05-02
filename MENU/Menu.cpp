@@ -5,10 +5,7 @@
 #include "Menu.h"
 #include "../GAME/Game.h"
 #include <fstream>
-const int fps=60;
-const int frameDelay=1000/fps;
-Uint32 frameStart;
-int frameTime;
+
 
 SDL_Renderer *Menu::renderer;
 SDL_Event Menu::event;
@@ -78,7 +75,6 @@ void Menu::update() {
             }
 
     }
-    //SDL_RenderClear(Menu::renderer);
     draw();
 }
 
@@ -103,8 +99,14 @@ void Menu::clean(){
 }
 
 void Menu::select() {
+    const int fps=60;
+    const int frameDelay=1000/fps;
+    Uint32 frameStart = SDL_GetTicks();
+    int frameTime;
+
     switch (selection) {
         case 0:
+
             active=false;
             game = new Game();
             game->init_newGame(ime);
@@ -113,11 +115,6 @@ void Menu::select() {
                 game->update();
                 game->render();
 
-                frameTime = SDL_GetTicks() - frameStart;
-
-                if (frameDelay > frameTime) {
-                    SDL_Delay(frameDelay - frameTime);
-                }
             }
             break;
         case 1:
@@ -129,26 +126,17 @@ void Menu::select() {
                 game->update();
                 game->render();
 
-                frameTime = SDL_GetTicks() - frameStart;
-
-                if (frameDelay > frameTime) {
-                    SDL_Delay(frameDelay - frameTime);
-                }
             }
             break;
         case 2:
             active=false;
             game = new Game();
-            game->init_replay();
+            game->init_replay(ime);
             while(game->isRunning) {
                 game->handleEvents();
                 game->replayUpdate();
                 game->renderReplay();
                 frameTime = SDL_GetTicks() - frameStart;
-
-                if (frameDelay > frameTime) {
-                    SDL_Delay(frameDelay - frameTime);
-                }
             }
             break;
     }

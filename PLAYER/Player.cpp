@@ -26,6 +26,8 @@ void Player::init(char tmz[]) {
 
 void Player::update() {
 
+    frameStart = SDL_GetTicks();
+
     handleInput();
     position.x += velocity.x * speedWalk;
     position.y += velocity.y * speedWalk;
@@ -38,6 +40,13 @@ void Player::update() {
 
     destRect.x =position.x - Game::camera.x;
     destRect.y=position.y - Game::camera.y;
+
+    frameTime = SDL_GetTicks() - frameStart;
+
+    if (frameDelay > frameTime) {
+        SDL_Delay(frameDelay - frameTime);
+    }
+
 
 }
 

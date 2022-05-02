@@ -16,6 +16,11 @@ struct Ldrbrd{
 int main(int argc, const char *argv[]) {
     srand(time(NULL));
 
+    const int fps=60;
+    const int frameDelay=1000/fps;
+    Uint32 frameStart;
+    int frameTime;
+
     std::string fsc;
     std::cout<<"VPISI ALI ZELIS FULLSCREEN: vpisi yes za da in no za ne: ";
     getline(std::cin,fsc);
@@ -26,6 +31,13 @@ int main(int argc, const char *argv[]) {
    game->init();
     while(game->isRunning){
        game->update();
+
+        frameTime = SDL_GetTicks() - frameStart;
+
+        if (frameDelay > frameTime) {
+            SDL_Delay(frameDelay - frameTime);
+        }
+
     }
     game->clean();
 
@@ -40,5 +52,6 @@ int main(int argc, const char *argv[]) {
             std::cout<<"---------------------------------------"<<std::endl;
         }
     }
+    system("pause");
     return 0;
 }
