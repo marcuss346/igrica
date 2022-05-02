@@ -8,7 +8,7 @@
 
 int main(int argc, const char *argv[]) {
     srand(time(NULL));
-    Menu *game=new Menu("new game",SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, 0);
+    Menu *game=new Menu("new game",SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, 1);
    game->init();
     while(game->isRunning){
        game->update();

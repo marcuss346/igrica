@@ -18,23 +18,23 @@ class Menu{
 
     SDL_Rect start = {
             0,
-            0,
+            128,
             800,
-            213
+            128
     };
 
     SDL_Rect load = {
             0,
-            213,
+            128*2,
             800,
-            213,
+            128,
     };
 
     SDL_Rect quit = {
             0,
-            416,
+            128*5 - 90,
             800,
-            213
+            128
     };
 
     SDL_Rect render = {

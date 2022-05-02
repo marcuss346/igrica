@@ -36,7 +36,7 @@ Menu::Menu(const char *title, int x, int y, int width, int height, bool fullscre
 }
 
 void Menu::init(){
-    SDL_Surface* assetBg = SDL_LoadBMP("../assets/home.bmp");
+    SDL_Surface* assetBg = SDL_LoadBMP("../assets/background.bmp");
     background = SDL_CreateTextureFromSurface(Menu::renderer, assetBg);
 
     SDL_Surface* assetSelector = SDL_LoadBMP("../assets/selector.bmp");
@@ -84,12 +84,7 @@ void Menu::draw() {
             &render
     );
 
-    SDL_RenderCopy(
-            Menu::renderer,
-            selector,
-            NULL,
-            &selectorRect
-    );
+
     SDL_RenderPresent(Menu::renderer);
 }
 
