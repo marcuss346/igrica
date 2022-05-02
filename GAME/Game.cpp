@@ -126,7 +126,6 @@ Game::Game() {
             }
             i++;
         }
-        std::cout<<"points of player: "<<player->points<<std::endl;
 
         if(SDL_HasIntersection(&lab->destRect, &player->destRect) &&
                 event.type==SDL_KEYDOWN && event.key.keysym.sym == SDLK_k){
