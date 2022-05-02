@@ -18,8 +18,8 @@ void Player::init() {
     srcRect.w=destRect.w=48;
     framesStanding=4;
     FramesWalking=6;
-    destRect.w = srcRect.w * 4;
-    destRect.h = srcRect.h * 4;
+    destRect.w = srcRect.w * 2;
+    destRect.h = srcRect.h * 2;
 }
 
 void Player::update() {
@@ -95,4 +95,9 @@ void Player::addPoints(int n) {
 
 void Player::removeLife() {
     lives--;
+}
+
+void Player::randLocation(){
+    position.x = rand()%2900;
+    position.y = rand()%1900;
 }

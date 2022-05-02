@@ -10,10 +10,10 @@ void Animal::init() {
     SDL_FreeSurface(tmp);
 
     srcRect.w=srcRect.h=48;
-    destRect.w=destRect.h = srcRect.w *4;
+    destRect.w=destRect.h = srcRect.w *2;
 
-    position.x=rand()%500;
-    position.y = rand()%300;
+    position.x=rand()%2800;
+    position.y = rand()%1800;
 }
 
 void Animal::update() {

@@ -13,7 +13,7 @@ private:
 
     int speed=100;
     int nFrames = 6;
-    int speeds = 2;
+    int speeds = 1;
 
 public:
     Vector2D position;

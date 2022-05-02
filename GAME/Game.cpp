@@ -101,6 +101,8 @@ Game::Game() {
             lab->init("../assets/lab.bmp",100,100);
         }
 
+
+
         camera.x = player->position.x - 800 / 2;
         camera.y = player->position.y - 640 / 2;
 
@@ -121,9 +123,11 @@ Game::Game() {
             if (SDL_HasIntersection(&enemies[t].destRect, &player->destRect)){
                 player->removeLife();
                 player->addPoints(-10);
+                player->randLocation();
             }
             i++;
         }
+
 
         if( camera.x < 0 )
         {
@@ -153,8 +157,6 @@ Game::Game() {
         for(int t=0;t<enemies.size();t++){
             enemies[t].draw();
         }
-
-
         if(!replayB)
             for(int t=0;t<animals.size();t++){
                 animals[t].draw();

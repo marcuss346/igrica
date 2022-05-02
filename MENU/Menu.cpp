@@ -64,7 +64,10 @@ void Menu::update() {
                 select();
             }
         }
-
+        else if(SDL_HasIntersection(&quit, &selectorRect))
+            if(event.type==SDL_MOUSEBUTTONDOWN && event.button.button==SDL_BUTTON_LEFT){
+                isRunning=false;
+            }
 
     }
     //SDL_RenderClear(Menu::renderer);

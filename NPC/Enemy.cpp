@@ -12,10 +12,10 @@ void Enemy::init() {
     SDL_FreeSurface(tmp);
 
     srcRect.w=srcRect.h=48;
-    destRect.w=destRect.h = srcRect.w *4;
+    destRect.w=destRect.h = srcRect.w *2;
 
-    position.x=rand()%500;
-    position.y = rand()%300;
+    position.x=rand()%2900;
+    position.y = rand()%1900;
 }
 
 void Enemy::update() {

@@ -34,4 +34,5 @@ public:
     void handleInput();
     void addPoints(int);
     void removeLife();
+    void randLocation();
 };
