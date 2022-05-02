@@ -92,3 +92,7 @@ void Player::handleInput() {
 void Player::addPoints(int n) {
     points += n;
 }
+
+void Player::removeLife() {
+    lives--;
+}

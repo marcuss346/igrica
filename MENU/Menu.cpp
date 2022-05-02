@@ -96,38 +96,6 @@ void Menu::clean(){
     std::cout << "game cleaned" << std::endl;
 }
 
-void Menu::setSelection() {
-    switch (selection) {
-        case 0:
-            selectorRect.y = 80;
-            break;
-        case 1:
-            selectorRect.y = 311;
-            break;
-        case 2:
-            selectorRect.y = 540;
-            break;
-    }
-}
-
-void Menu::moveDown() {
-    if (selection != 2) {
-        selection++;
-    }
-    setSelection();
-}
-
-void Menu::moveUp() {
-    if (selection != 0) {
-        selection--;
-    }
-    setSelection();
-}
-
-int Menu::getSelection() {
-    return selection;
-}
-
 void Menu::select() {
     switch (selection) {
         case 0:

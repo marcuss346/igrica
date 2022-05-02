@@ -58,19 +58,9 @@ public:
     Menu(const char *title, int x, int y, int width, int height, bool fullscreen);
     void init();
     void clean();
-    void handleEvents();
     void draw();
-    void renders();
 
-
-
-    void setSelection();
-    int getSelection();
-
-    void moveDown();
-    void moveUp();
     void select();
     void update();
-    void setScreen(int);
 
 };

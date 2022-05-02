@@ -49,12 +49,18 @@ Game::Game() {
         switch (event.type) {
             case SDL_QUIT:
                 isRunning=false;
+                remove("../assets/files/save.bin");
                 break;
         }
 
         if(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE){
             isRunning=false;
             saveState();
+        }
+
+        if(player->lives == 0){
+            isRunning=false;
+            remove("../assets/files/save.bin");
         }
 }
 
@@ -78,6 +84,7 @@ Game::Game() {
             if (SDL_HasIntersection(&animals[t].destRect, &player->destRect)
             && (event.type==SDL_KEYDOWN && event.key.keysym.sym == SDLK_c)){
                 animals.erase(animals.begin() + i, animals.begin()+i+1);
+                player->addPoints(50);
             }
             i++;
         }
@@ -107,6 +114,15 @@ Game::Game() {
             }else if(player->position.y < enemies[t].position.y) {
                 enemies[t].velocity.y = -1;
             }
+        }
+
+        i=0;
+        for(int t=0;t<enemies.size();t++) {
+            if (SDL_HasIntersection(&enemies[t].destRect, &player->destRect)){
+                player->removeLife();
+                player->addPoints(-10);
+            }
+            i++;
         }
 
         if( camera.x < 0 )

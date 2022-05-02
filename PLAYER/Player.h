@@ -23,7 +23,9 @@ class Player{
 
 
 
+
 public:
+    int lives= 5;
     Vector2D position;
     SDL_Rect srcRect, destRect;
     void init();
@@ -31,4 +33,5 @@ public:
     void draw();
     void handleInput();
     void addPoints(int);
+    void removeLife();
 };
