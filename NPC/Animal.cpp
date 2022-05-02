@@ -12,8 +12,8 @@ void Animal::init() {
     srcRect.w=srcRect.h=48;
     destRect.w=destRect.h = srcRect.w *2;
 
-    position.x=rand()%2800;
-    position.y = rand()%1800;
+    position.x=rand()%1900;
+    position.y = rand()%900;
 }
 
 void Animal::update() {

@@ -14,8 +14,8 @@ void Enemy::init() {
     srcRect.w=srcRect.h=48;
     destRect.w=destRect.h = srcRect.w *2;
 
-    position.x=rand()%2900;
-    position.y = rand()%1900;
+    position.x=rand()%1900;
+    position.y = rand()%900;
 }
 
 void Enemy::update() {

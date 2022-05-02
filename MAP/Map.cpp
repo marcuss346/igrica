@@ -8,7 +8,7 @@
 void Map::init(int level, SDL_Renderer *ren) {
     switch(level){
         case 1:
-            SDL_Surface *tmp=SDL_LoadBMP("../assets/tiles.bmp");
+            SDL_Surface *tmp=SDL_LoadBMP("../assets/map.bmp");
             map= SDL_CreateTextureFromSurface(Menu::renderer, tmp);
             break;
     }

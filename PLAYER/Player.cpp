@@ -98,6 +98,6 @@ void Player::removeLife() {
 }
 
 void Player::randLocation(){
-    position.x = rand()%2900;
-    position.y = rand()%1900;
+    position.x = rand()%1900;
+    position.y = rand()%900;
 }

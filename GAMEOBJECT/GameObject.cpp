@@ -11,8 +11,8 @@ void GameObject::init(const char *path, int w, int h) {
     texture = SDL_CreateTextureFromSurface(Menu::renderer,tmp);
     SDL_FreeSurface(tmp);
 
-    position.x= rand()%(2900-0)+0;
-    position.y = rand()%(1900-0)+0;
+    position.x= rand()%(1900-0)+0;
+    position.y = rand()%(900-0)+0;
     destRect.w=w;
     destRect.h=h;
 

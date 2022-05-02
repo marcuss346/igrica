@@ -13,7 +13,7 @@ GameObject *lab;
 
 SDL_Event Game::event;
 SDL_Rect Game::camera {
-        0, 0 , 3000, 2000
+        0, 0 , 2000, 1000
 };
 
 
@@ -69,6 +69,7 @@ Game::Game() {
         for(int t=0;t<animals.size();t++){
             animals[t].update();
         }
+        if(lab->exsists)
         lab->update();
         map->update();
         for(int t=0;t<enemies.size();t++){
@@ -153,6 +154,7 @@ Game::Game() {
 
             map->draw();
             player->draw();
+            if(lab->exsists)
             lab->draw();
         for(int t=0;t<enemies.size();t++){
             enemies[t].draw();
